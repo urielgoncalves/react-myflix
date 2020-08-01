@@ -14,7 +14,7 @@ function Menu() {
             </a> */}
 
             <Link to="/">
-                <img clLinkssName="Logo" src={Logo} alt="MyFlix" />
+                <img className="Logo" src={Logo} alt="MyFlix" />
             </Link>
 
             {/* <ButtonLink className="ButtonLink" href="/" >
