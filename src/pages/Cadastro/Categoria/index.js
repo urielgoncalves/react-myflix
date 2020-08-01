@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import PageDefault from '../../../components/PageDefault';
+import FormField from '../../../components/FormField';
 
 function CadastroCategoria() {
   const m = {
@@ -26,7 +27,6 @@ function CadastroCategoria() {
       event.target.getAttribute('name'),
       event.target.value
     );
-    console.log(event);
     // const { getAttribute, value} = event.target;
 
     // handleDadosForm(
@@ -50,18 +50,14 @@ function CadastroCategoria() {
 
         setDadosForm(m)
       }}>
-        <div>
-          <label>
-            Nome da Categoria:
-          <input
-              name="nome"
-              type="text"
-              value={dadosForm.nome}
-              onChange={handleChange}
-            />
-          </label>
-        </div>
-        <div>
+
+        <FormField label='Nome da categoria' type="text" name='nome' value={dadosForm.nome} onChange={handleChange} />
+
+        <FormField label='Descricao' type="textarea" name='descricao' value={dadosForm.descricao} onChange={handleChange} />
+
+        <FormField label='Cor' type="color" name='cor' value={dadosForm.cor} onChange={handleChange} />
+        
+        {/* <div>
           <label>
             Descricao:
           <input
@@ -82,7 +78,7 @@ function CadastroCategoria() {
               onChange={handleChange}
             />
           </label>
-        </div>
+        </div> */}
         <button>
           Cadastrar
         </button>
