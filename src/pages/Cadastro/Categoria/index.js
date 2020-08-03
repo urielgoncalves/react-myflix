@@ -3,6 +3,42 @@ import { Link } from 'react-router-dom';
 import PageDefault from '../../../components/PageDefault';
 import FormField from '../../../components/FormField';
 import Button from '../../../components/Button';
+import useForm from '../../../hooks/useForm';
+
+// // Custom hook
+// function useForm(m) {
+//   const [dadosForm, setDadosForm] = useState(m);
+//   function handleDadosForm(key, value) {
+//     // chave: nome, descricao, cor
+//     setDadosForm({
+//       ...dadosForm,
+//       [key]: value, // nome: 'valor'
+//     });
+//   }
+
+//   function handleChange(event) {
+//     handleDadosForm(
+//       event.target.getAttribute('name'),
+//       event.target.value,
+//     );
+//     // const { getAttribute, value} = event.target;
+
+//     // handleDadosForm(
+//     //   getAttribute('name'),
+//     //   value
+//     // );
+//   }
+
+//   function clearForm() {
+//     setDadosForm(m);
+//   }
+
+//   return {
+//     dadosForm,
+//     handleChange,
+//     clearForm,
+//   };
+// }
 
 function CadastroCategoria() {
   const m = {
@@ -13,32 +49,12 @@ function CadastroCategoria() {
 
   const [categorias, setCategorias] = useState([]);
   // const [nomeDaCategoria, setNomeDaCategoria] = useState('');
-  const [dadosForm, setDadosForm] = useState(m);
 
-  function handleDadosForm(key, value) {
-    // chave: nome, descricao, cor
-    setDadosForm({
-      ...dadosForm,
-      [key]: value, // nome: 'valor'
-    });
-  }
-
-  function handleChange(event) {
-    handleDadosForm(
-      event.target.getAttribute('name'),
-      event.target.value,
-    );
-    // const { getAttribute, value} = event.target;
-
-    // handleDadosForm(
-    //   getAttribute('name'),
-    //   value
-    // );
-  }
+  const { dadosForm, handleChange, clearForm } = useForm(m);
 
   useEffect(() => {
-    const URL = 'http://localhost:8080/categorias';
-    fetch(URL)
+    const PUBLIC_URL = 'http://localhost:8080/categorias';
+    fetch(PUBLIC_URL)
       .then(async (response) => {
         const jsonResponse = await response.json();
         setCategorias([
@@ -60,7 +76,7 @@ function CadastroCategoria() {
           dadosForm,
         ]);
 
-        setDadosForm(m);
+        clearForm();
       }}
       >
 
@@ -107,7 +123,7 @@ function CadastroCategoria() {
         {
           categorias.map((categoria) => (
             <li key={categoria.id}>
-              {categoria.nome}
+              {categoria.titulo}
             </li>
           ))
         }
